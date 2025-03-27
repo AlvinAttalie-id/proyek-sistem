@@ -91,9 +91,9 @@
                                             </td>
                                             <td class="text-center text-xs">
                                                 <span
-                                                    class="badge text-white 
-                                        @if ($data->status == 'Done') bg-info 
-                                        @elseif($data->status == 'Available') bg-success 
+                                                    class="badge text-white
+                                        @if ($data->status == 'Done') bg-info
+                                        @elseif($data->status == 'Available') bg-success
                                         @else bg-primary @endif">
                                                     {{ $data->status }}
                                                 </span>
@@ -103,17 +103,17 @@
                                                     @php
                                                         // Menghitung persentase progress berdasarkan status kolom
                                                         $progress = 0;
-    
+
                                                         // Cek apakah kolom barang terisi
                                                         if (!empty($data->nama_barang)) {
                                                             $progress += 25;
                                                         }
-    
+
                                                         // Cek apakah kolom jumlah terisi
                                                         if (!empty($data->jumlah)) {
                                                             $progress += 35; // Menambahkan 35% jika jumlah terisi, total menjadi 60%
                                                         }
-    
+
                                                         // Cek apakah kolom foto terisi
                                                         if (!empty($data->foto)) {
                                                             $progress += 40; // Menambahkan 40% jika foto terisi, total menjadi 100%
@@ -124,15 +124,17 @@
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-success" role="progressbar"
                                                                 aria-valuenow="{{ $progress }}" aria-valuemin="0"
-                                                                aria-valuemax="100" style="width: {{ $progress }}%;"></div>
+                                                                aria-valuemax="100" style="width: {{ $progress }}%;">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-    
+
                                             </td>
-                                            <td class="text-center "><a href="{{ route('proyek.detail', $data->id) }}" class="mx-0 text-center">
-                                                <i class="fa fa-id-badge text-secondary"></i>
-                                            </a> </td>
+                                            <td class="text-center "><a href="{{ route('proyek.detail', $data->id) }}"
+                                                    class="mx-0 text-center">
+                                                    <i class="fa fa-id-badge text-secondary"></i>
+                                                </a> </td>
                                             <td class="text-center text-xs">
                                                 <!-- Edit Button triggers its own modal -->
                                                 <a href="#" class="mx-0 text-center" data-bs-toggle="modal"
@@ -143,8 +145,8 @@
                                                     method="POST" style="display:inline; color:white;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="mx-0 text-center"
-                                                        data-bs-toggle="tooltip" data-bs-original-title="Hapus Data">
+                                                    <button type="submit" class="mx-0 text-center" data-bs-toggle="tooltip"
+                                                        data-bs-original-title="Hapus Data">
                                                         <i class="cursor-pointer fas fa-trash text-secondary"></i>
                                                     </button>
                                                 </form>
@@ -157,49 +159,78 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="editModalLabel{{ $data->id }}">Edit Data</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="editModalLabel{{ $data->id }}">
+                                                            Edit Data</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('proyek.update', ['proyek' => $data->id]) }}"
-                                                            method="POST"
-                                                            enctype="multipart/form-data"> <!-- Tambahkan ini -->
+                                                        <form
+                                                            action="{{ route('proyek.update', ['proyek' => $data->id]) }}"
+                                                            method="POST" enctype="multipart/form-data">
+                                                            <!-- Tambahkan ini -->
                                                             @csrf
                                                             @method('PUT')
                                                             <input type="hidden" name="update_type" value="monitor">
                                                             <div class="row mt-4">
                                                                 <div class="col-md-12">
-                                                                    <label for="edit_nama_barang{{ $data->id }}" class="form-control-label">Barang</label>
+                                                                    <label for="edit_nama_barang{{ $data->id }}"
+                                                                        class="form-control-label">Barang</label>
                                                                     <div class="form-group">
-                                                                        <input type="text" name="nama_barang" class="form-control" id="edit_nama_barang{{ $data->id }}"
-                                                                            value="{{ $data->nama_barang }}" required>
+                                                                        <select name="nama_barang" class="form-control"
+                                                                            id="edit_nama_barang{{ $data->id }}"
+                                                                            required>
+                                                                            <option value="1"
+                                                                                {{ $data->nama_barang == '1' ? 'selected' : '' }}>
+                                                                                Laptop</option>
+                                                                            <option value="2"
+                                                                                {{ $data->nama_barang == '2' ? 'selected' : '' }}>
+                                                                                Meja</option>
+                                                                            <option value="3"
+                                                                                {{ $data->nama_barang == '3' ? 'selected' : '' }}>
+                                                                                Printer</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
+
                                                                 <div class="col-md-12">
-                                                                    <label for="edit_jumlah{{ $data->id }}" class="form-control-label">Jumlah</label>
+                                                                    <label for="edit_jumlah{{ $data->id }}"
+                                                                        class="form-control-label">Jumlah</label>
                                                                     <div class="form-group">
-                                                                        <input type="text" name="jumlah" class="form-control" id="edit_jumlah{{ $data->id }}"
+                                                                        <input type="text" name="jumlah"
+                                                                            class="form-control"
+                                                                            id="edit_jumlah{{ $data->id }}"
                                                                             value="{{ $data->jumlah }}" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-                                                                    <label for="edit_harga{{ $data->id }}" class="form-control-label">Harga</label>
+                                                                    <label for="edit_harga{{ $data->id }}"
+                                                                        class="form-control-label"></label>
                                                                     <div class="form-group">
-                                                                        <input type="text" name="harga" class="form-control" id="edit_harga{{ $data->id }}"
+                                                                        <input type="hidden" name="harga"
+                                                                            class="form-control"
+                                                                            id="edit_harga{{ $data->id }}"
                                                                             value="{{ $data->harga }}" required readonly>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12">
-                                                                    <label for="edit_foto{{ $data->id }}" class="form-control-label">Foto</label>
+                                                                    <label for="edit_foto{{ $data->id }}"
+                                                                        class="form-control-label">Foto</label>
                                                                     <div class="form-group">
-                                                                        <input type="file" name="foto" class="form-control" id="edit_foto{{ $data->id }}" accept="image/*">
+                                                                        <input type="file" name="foto"
+                                                                            class="form-control"
+                                                                            id="edit_foto{{ $data->id }}"
+                                                                            accept="image/*">
                                                                     </div>
                                                                 </div>
-                                                                <div class="w-full px-0 flex flex-wrap justify-content-between pt-3">
-                                                                    <button type="submit" class="btn bg-gradient-primary btn-sm">
+                                                                <div
+                                                                    class="w-full px-0 flex flex-wrap justify-content-between pt-3">
+                                                                    <button type="submit"
+                                                                        class="btn bg-gradient-primary btn-sm">
                                                                         <i class="fas fa-heart"></i> Save Changes
                                                                     </button>
-                                                                    <button type="reset" class="btn bg-gradient-success btn-sm">
+                                                                    <button type="reset"
+                                                                        class="btn bg-gradient-success btn-sm">
                                                                         <i class="ti ti-printer"></i> Clear
                                                                     </button>
                                                                 </div>
@@ -209,7 +240,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     @endif
                                 @endforeach
                             </tbody>

@@ -3,11 +3,11 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-            <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
-                <img src="{{ asset('assets/img/kalsel-logo.png') }}" class="navbar-brand-img h-100" alt="...">
-                <span class="ms-3 font-weight-bold">DPPPAKB</span>
-            </a>
-            
+        <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
+            <img src="{{ asset('assets/img/kalsel-logo.png') }}" class="navbar-brand-img h-100" alt="...">
+            <span class="ms-3 font-weight-bold">DPPPAKB</span>
+        </a>
+
     </div>
 
     <!-- Section NavBar Start -->
@@ -175,7 +175,7 @@
 
             <!-- Section Proyek Start -->
             <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Proyek</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Data Master</h6>
             </li>
             <div class="collapse navbar-collapse w-auto h-auto ps" id="sidenav-collapse-proyek">
                 <ul class="navbar-nav">
@@ -208,9 +208,10 @@
                                     </g>
                                 </svg>
                             </div>
-                            <span class="nav-link-text ms-1">Proyek</span>
+                            <span class="nav-link-text ms-1">Perencanaan</span>
                         </a>
-                        <div class="collapse {{ Request::is('proyek*') || Request::is('monitoring') || Request::is('skm') ? 'show' : '' }}" id="proyekCollapse">
+                        <div class="collapse {{ Request::is('proyek*') || Request::is('monitoring') || Request::is('skm') ? 'show' : '' }}"
+                            id="proyekCollapse">
                             <ul class="nav ms-4 ps-3">
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::is('proyek') ? 'active' : '' }}"
